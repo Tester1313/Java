@@ -24,12 +24,13 @@ public class Exercicio13 {
 		if ( a == 0) {
 			System.out.println("Não é uma equação do Segundo Grau");
 		} else {
-			delta = (b^2-4*a*c);
+			//int teste = b*b;
+			delta = ((b*b)-(4*a*c));
 			if ( delta < 0) {
 				System.out.println("Essa equação não tem raiz.");
 			} else {
-				x1= (-b+(delta^(1/2)))/(2*a);
-				x2= (-b-(delta^(1/2)))/(2*a);
+				x1= (-(b)+(delta^(1/2)))/(2*a);
+				x2= (-(b)-(delta^(1/2)))/(2*a);
 				
 				System.out.println("As raizes são: "+x1 +" e "+x2);
 			}
