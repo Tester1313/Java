@@ -14,28 +14,28 @@ public class Exercicio5 {
 		System.out.println("Compara a população do pais A e B e quanto tempo irá levar para a população de A chegar a população de B");
 		
 		do {
-		System.out.println("Digite a população do pais A: ");
-		paisA = scan.nextInt();
-		
-		System.out.println("Digite a população do pais B: ");
-		paisB = scan.nextInt();
-		
-		if( paisA < paisB) {
-		for(int i=1; ; i++) {
-			paisA += (paisA/100) * 3;
-			paisB += (paisB/100)* 1.5;
-			flag = true;
-			if( paisA > paisB) {
-				System.out.println("Levará "+i+" anos para o paisA alcancar a população do paisB");
-				break;
+				System.out.println("Digite a população do pais A: ");
+				paisA = scan.nextInt();
 				
-			}
-			
-		}
-		}else {
-			System.out.println("PaisA já tem uma população maior que PaisB ou entrada invalida");
-		}
-		}while(!flag);
+				System.out.println("Digite a população do pais B: ");
+				paisB = scan.nextInt();
+				
+				if( paisA < paisB) {
+					for(int i=1; ; i++) {
+						paisA += (paisA/100) * 3;
+						paisB += (paisB/100)* 1.5;
+						flag = true;
+						if( paisA > paisB) {
+							System.out.println("Levará "+i+" anos para o paisA alcancar a população do paisB");
+							break;
+							
+						}
+						
+					}
+				}else {
+					System.out.println("PaisA já tem uma população maior que PaisB ou entrada invalida");
+				}
+			}while(!flag);
 	}
 
 }
