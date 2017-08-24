@@ -1,11 +1,13 @@
 package labs;
 
-public class TesteSomatorio {
+public class Teste {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(Somatorio.somatorio(3));
 		
+		for(int i=0; i<10; i++) {
+			System.out.println(Fibonacci.fibonacci(i)+" ");
+		}
 	}
 
 }
