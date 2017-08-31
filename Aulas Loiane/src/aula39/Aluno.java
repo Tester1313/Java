@@ -1,32 +1,22 @@
-package aula38;
+package aula39;
 
 public class Aluno extends Pessoa {
 
 	private String curso;
 	private double[] notas;
+	//Protected é visivel na subclasse também ao contrario do default
 	
-
-	/*public Aluno(String curso, double[] notas) {
-		super(); // Funciona como o this porem faz referencia a super classe
+	public Aluno(String nome, String endereco, String telefone, String cpf, String curso, double[] notas) {
+		//super(nome, endereco, telefone, cpf);
 		this.curso = curso;
 		this.notas = notas;
 	}
-	
-	
-	
-	/*public Aluno() {
-		super();
-		// TODO Auto-generated constructor stub
+
+	public void verificarAcesso() {
+		//super.
+		super.nomeVisibilidade = "Thiago";
 	}
-
-
-
-	public Aluno(String nome, String endereco, String telefone, String curso) {
-		super(nome, endereco, telefone);
-		this.curso = curso;
-	}*/
-
-
+	
 	public String getCurso() {
 		return curso;
 	}
@@ -46,11 +36,5 @@ public class Aluno extends Pessoa {
 	
 	public boolean verificarAprovado() {
 		return true;
-	}
-	
-	public void teste() {
-		super.setCpf("4445545454");
-		this.setCpf("445454545");
-		
 	}
 }
