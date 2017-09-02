@@ -1,9 +1,11 @@
 package labs43;
 
 public class ContaBancaria {
-	String nomeCliente;
-	String numConta;
-	double saldo;
+	private String nomeCliente;
+	private String numConta;
+	private double saldo;
+	
+	
 	public String getNomeCliente() {
 		return nomeCliente;
 	}

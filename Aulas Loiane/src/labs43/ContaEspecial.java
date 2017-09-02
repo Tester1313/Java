@@ -14,7 +14,7 @@ public class ContaEspecial extends ContaBancaria {
 	
 	public void realizarSaque(double valor) {
 		if(this.getSaldo() >= valor) {
-			this.setSaldo(this.saldo - valor);
+			this.setSaldo(this.getSaldo() - valor);
 			System.out.println("Saque no valor de "+valor+" realizado com sucesso.");
 			System.out.println("Seu saldo atual é de: "+this.getSaldo());
 		

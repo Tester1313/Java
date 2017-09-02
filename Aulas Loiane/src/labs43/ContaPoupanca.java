@@ -2,7 +2,7 @@ package labs43;
 
 public class ContaPoupanca extends ContaBancaria {
 	
-	String diaRendimento;
+	private String diaRendimento;
 	
 	public void calcularNovoSaldo(double taxaRendimento) {
 		double aux = 0;
