@@ -2,7 +2,7 @@ package labs43;
 
 public class ContaEspecial extends ContaBancaria {
 	
-	double limite;
+	private double limite;
 
 	public double getLimite() {
 		return limite;
@@ -12,19 +12,24 @@ public class ContaEspecial extends ContaBancaria {
 		this.limite = limite;
 	}
 	
-	public void realizarSaque(double valor) {
-		if(this.getSaldo() >= valor) {
-			this.setSaldo(this.saldo - valor);
-			System.out.println("Saque no valor de "+valor+" realizado com sucesso.");
-			System.out.println("Seu saldo atual é de: "+this.getSaldo());
+	@Override
+	public String toString() {
+		String s = "ContaEspecial";
+		s += " limite:"+ limite+" ] ";
+		s += super.toString();
+		s += "]";
 		
-		}else if ( (this.getSaldo() + this.limite) >= valor){
-			this.setSaldo(this.getSaldo()-valor);
-			System.out.println("Saque no valor de "+valor+" realizado com sucesso.");
-			System.out.println("Seu saldo atual é de: "+this.getSaldo());
-		}else {
-			System.out.println("Você não tem saldo suficiente para realizar o saque.");
-			System.out.println("Seu saldo atual é de: "+this.getSaldo());
+		return s;
+	}
+	
+	public boolean realizarSaque(double valor) {
+		
+		double saldoComLimite = this.getSaldo() + limite;
+		
+		if((saldoComLimite - valor) >= 0) {
+			this.setSaldo(this.getSaldo() - valor);
+			return true;
 		}
+		return false;
 	}
 }

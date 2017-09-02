@@ -1,13 +1,39 @@
 package labs43;
 
+import java.util.Calendar;
+
 public class ContaPoupanca extends ContaBancaria {
 	
-	String diaRendimento;
+	private int diaRendimento;
 	
-	public void calcularNovoSaldo(double taxaRendimento) {
-		double aux = 0;
-		aux = (super.getSaldo()*taxaRendimento)/100;
+	public int getDiaRendimento() {
+		return diaRendimento;
+	}
+
+
+	public void setDiaRendimento(int diaRendimento) {
+		this.diaRendimento = diaRendimento;
+	}
+	
+	@Override
+	public String toString() {
+		String s = "ContaPoupanca";
+		s += " diaRendimento:"+ diaRendimento+" ] ";
+		s += super.toString();
+		s += "]";
 		
-		super.setSaldo(super.getSaldo() + aux);
+		return s;
+	}
+	
+	public boolean calcularNovoSaldo(double taxaRendimento) {
+		
+		// Pega o dia de hoje
+		Calendar hoje = Calendar.getInstance();
+		
+		if(diaRendimento == hoje.get(Calendar.DAY_OF_MONTH)) {
+			this.setSaldo(this.getSaldo() + (this.getSaldo() * taxaRendimento));
+			return true;
+		}
+		return false;
 	}
 }

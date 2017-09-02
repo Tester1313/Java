@@ -1,9 +1,10 @@
 package labs43;
 
 public class ContaBancaria {
-	String nomeCliente;
-	String numConta;
-	double saldo;
+	private String nomeCliente;
+	private String numConta;
+	private double saldo;
+	
 	public String getNomeCliente() {
 		return nomeCliente;
 	}
@@ -23,20 +24,25 @@ public class ContaBancaria {
 		this.saldo = saldo;
 	}
 	
-	public void realizarSaque(double valor) {
-		if(this.getSaldo() >= valor) {
-			this.setSaldo(this.saldo - valor);
-			System.out.println("Saque no valor de "+valor+" realizado com sucesso.");
-			System.out.println("Seu saldo atual é de: "+this.getSaldo());
-		}else {
-			System.out.println("Você não tem saldo suficiente para realizar o saque.");
-			System.out.println("Seu saldo atual é de: "+this.getSaldo());
-		}
+	@Override
+	public String toString() {
+		String s = "ContaBancaria";
+		s += " nome Cliente:"+ nomeCliente;
+		s += " numConta: "+ numConta;
+		s += " saldo: "+ saldo;
+		
+		return s;
 	}
 	
 	public void realizarDeposito(double valor) {
-		this.setSaldo(this.saldo += valor);
-		System.out.println("Deposito no valor de "+valor+" realizado com sucesso.");
-		System.out.println("Seu saldo atual é de: "+this.getSaldo());
+		this.saldo += valor;
+	}
+	
+	public boolean realizarSaque(double valor) {
+		if((saldo - valor) >= 0) {
+			saldo -= valor;
+			return true;
+		}
+		return false;
 	}
 }
