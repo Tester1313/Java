@@ -46,8 +46,8 @@ public class Teste {
 			System.out.println(contato.getEndereco().getCidade());
 		}
 		
-		/*if(contato != null && contato.getTelefone() != null) {
-			System.out.println(contato.getTelefone().getDdd()+" "+contato.getTelefone().getNumero());
+		/*if(contato != null && contato.getTelefones() != null) {
+			System.out.println(contato.getTelefones().getDdd()+" "+contato.getTelefone().getNumero());
 		}*/
 		if(contato != null && contato.getTelefones() != null) {
 			for(Telefone t : contato.getTelefones()) {
