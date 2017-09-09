@@ -1,4 +1,6 @@
-package aula02;
+package estruturas;
+
+import java.util.Arrays;
 
 public class Vetor {
 	
@@ -37,7 +39,29 @@ public class Vetor {
 			return true;
 		}
 		return false;
-		
 	}
+
+	public int getTamanho() {
+		return tamanho;
+	}	
 	
+	public String toString() {
+		
+		// Append concatena as palavras
+		StringBuilder s = new StringBuilder();
+		s.append("[");
+		
+		for(int i = 0; i<this.tamanho-1; i++) {
+			s.append(this.elementos[i]);
+			s.append(", ");
+		}
+		
+		if(this.tamanho > 0) {
+			s.append(this.elementos[this.tamanho-1]);
+		}
+		
+		s.append("]");
+		
+		return s.toString();
+	}
 }

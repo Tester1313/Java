@@ -1,5 +1,7 @@
 package aula02;
 
+import estruturas.Vetor;
+
 public class Aula3 {
 
 	public static void main(String[] args) {
