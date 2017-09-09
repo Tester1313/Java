@@ -33,6 +33,7 @@ public class Vetor {
 	}*/
 
 	public boolean adiciona(String elemento) {
+		this.aumentaCapacidade();
 		if(this.tamanho < this.elementos.length) {
 			this.elementos[this.tamanho] = elemento;
 			this.tamanho++;
@@ -42,12 +43,12 @@ public class Vetor {
 	}
 	
 	public boolean adiciona(int posicao, String elemento) {
-		
+		this.aumentaCapacidade();
 		if(!(posicao >= 0 && posicao < tamanho)) {
 			throw new IllegalArgumentException("Posicao invalida");
 		}
 		
-		// Mover elementos
+		//Aula 07 Mover elementos
 		// Tamanho tem o tamanho real do vetor, a quantidade de elementos utilizados
 		for(int i = this.tamanho; i >= posicao; i--) {
 			this.elementos[i+1] = this.elementos[i];
@@ -55,6 +56,17 @@ public class Vetor {
 		this.elementos[posicao] = elemento;
 		this.tamanho++;
 		return true;
+	}
+	
+	// Aula 08
+	private void aumentaCapacidade(){
+		if(this.tamanho == this.elementos.length) {
+			String[] elementosNovos = new String[this.elementos.length* 2]; //dobrar tamanho do vetor;
+			for( int i=0; i<this.elementos.length; i++) {
+				elementosNovos[i] = this.elementos[i];
+			}
+			this.elementos = elementosNovos;
+		}
 	}
 
 	public String busca(int posicao) {
