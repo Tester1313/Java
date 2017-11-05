@@ -74,11 +74,11 @@ public class Matriz  {
 		
 		//Ordena List de Arrays
 		Collections.sort (list, new Comparator() {  
-            public int compare(Object o1, Object o2) {  
-                ArrayList c1 = (ArrayList) o1;  
-                ArrayList c2 = (ArrayList) o2;
-                return (int)c1.get(10) < (int)c2.get(10) ? -1 : ((int)c1.get(10) > (int)c2.get(10) ? +1 : 0);
-              }});
+        public int compare(Object o1, Object o2) {  
+              ArrayList c1 = (ArrayList) o1;  
+              ArrayList c2 = (ArrayList) o2;
+              return (int)c1.get(10) < (int)c2.get(10) ? -1 : ((int)c1.get(10) > (int)c2.get(10) ? +1 : 0);
+        }});
 	}
 
 	public List getList() {

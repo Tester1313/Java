@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class main {
 
 	public static void main(String[] args) {
-		
+		//http://www.inf.ufsc.br/~alexandre.goncalves.silva/courses/14s2/ine5633/slides/aulaAG.pdf
 		Scanner scan = new Scanner(System.in);
 		Matriz matriz = new Matriz();
 		
@@ -28,7 +28,7 @@ public class main {
 		//Passo a matriz do txt para a classe matriz
 		matriz.setMatriz(le.getMatriz());
 		
-		matriz.imprimirMatriz();
+		//matriz.imprimirMatriz();
 		
 		//ArrayList minhaCidades = new ArrayList();
 		
@@ -36,13 +36,13 @@ public class main {
 		GeraGeracoes geracoes = new GeraGeracoes(10);
 		geracoes.imprimirArray();
 		list = geracoes.gerarGeracoes();
-		//geracoes.imprimirGeracoes();
+		geracoes.imprimirGeracoes(list);
 		
 		list = matriz.calcularDistancia(list);
 		matriz.OrdenaVetor(list);
 		
 		geracoes.imprimirGeracoes(list);
-		
+		geracoes.crossover(list);
 	
 		
 		System.out.println(list);
