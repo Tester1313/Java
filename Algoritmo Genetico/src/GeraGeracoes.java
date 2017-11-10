@@ -1,55 +1,42 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-<<<<<<< HEAD
-=======
 import java.util.ListIterator;
->>>>>>> 451565914baad5c44e57016532cfbcf598a4c2d6
 import java.util.Random;
 import java.util.function.Consumer;
 
 
 public class GeraGeracoes {
 
-<<<<<<< HEAD
-	ArrayList array = new ArrayList();
-=======
 	ArrayList array;
->>>>>>> 451565914baad5c44e57016532cfbcf598a4c2d6
 	ArrayList genes;
+	
+	Matriz matriz = new Matriz();
 	
 	//Lista de ArrayList com as Geracoes gerada
 	List list = new ArrayList<ArrayList>();
-<<<<<<< HEAD
-	
-	public GeraGeracoes(int numCidades) {
-		super();
-		this.array = array;
-		
-		for(int i = 0; i < numCidades; i++) {
-			array.add(i);
-=======
 	List filhos = new ArrayList<ArrayList>();
 	
-	public GeraGeracoes(int numCidades) {
+	public GeraGeracoes(int numCidades,Matriz matriz) {
+		this.matriz = matriz;
 		array = new ArrayList(numCidades);
 		
-		for(int i = 0; i < numCidades; i++) {
+		Random random = new Random();
+		int aux = random.nextInt(numCidades); // Gera primeira e ultima cidade Aleatoria
+		
+		for(int i = 0; i < (numCidades); i++) {
 			if(i == 0 || i == (numCidades-1)) {
-				array.add(i);
+				array.add(i,aux);
 			}else {
 				array.add("A");
 			}
->>>>>>> 451565914baad5c44e57016532cfbcf598a4c2d6
 		}
 	}
 	
 	public ArrayList getArray() {
-<<<<<<< HEAD
-		return array;
-=======
 		return this.array;
->>>>>>> 451565914baad5c44e57016532cfbcf598a4c2d6
 	}
 
 	public void setArray(ArrayList array) {
@@ -62,45 +49,6 @@ public class GeraGeracoes {
 	
 	//Gera as Geracoes Aleatoriamentes
 	public List<ArrayList> gerarGeracoes() {
-<<<<<<< HEAD
-		Random gerador = new Random();
-		for(int i = 0 ;i < 10; i++) {
-			//Inicializa o Vetor de genes
-			genes = new ArrayList(Arrays.asList("A","A","A","A","A","A","A","A"));
-			
-			// Passamos para o Genes o inicial e o Final
-			Object aux2 = this.array.get(9);
-			Object aux1 = this.array.get(0);
-			genes.add(0, aux1);
-			genes.add(9, aux2);
-			
-			
-			int j = 1;
-			
-			//Gera aleatoriamente valoes entre os paramentros passados
-			while(j < (this.array.size() - 1)) {
-				//Verifica se o valor ja esta no array, caso não, remove o valor atual e insere o novo valor na posicao j
-				int aux = gerador.nextInt(9);
-				if(!genes.contains(aux)) {
-					genes.remove(j);
-					genes.add(j, aux);
-					j++;
-				}
-			}
-			//Passa o Array list para uma lista de todos os genes gerados
-			////System.out.println(this.genes);
-			list.add(this.genes);
-			
-		}
-		//Retorna A lista de Genes para Main
-		return list;
-	}
-	
-	void imprimirGeracoes() {
-		System.out.println(this.list);
-	}
-	
-=======
 		for(int i = 0 ;i < this.array.size(); i++) {
 			list.add(verificaPosicoes(this.getArray()));
 		}
@@ -108,6 +56,7 @@ public class GeraGeracoes {
 		return list;
 	}
 	
+	//Verifica se tenho A no ARRAYLIST
 	public ArrayList verificaPosicoes(ArrayList genes) {
 		int j = 1;
 		Random gerador = new Random();
@@ -118,7 +67,8 @@ public class GeraGeracoes {
 		while(j < (gene.size() - 1)) {
 			if( genes.get(j).toString().equals("A")) {
 				//Verifica se o valor ja esta no array, caso não, remove o valor atual e insere o novo valor na posicao j
-				int aux = gerador.nextInt(9);
+				int a = this.getArray().size();
+				int aux = gerador.nextInt(48);
 				if(!gene.contains(aux)) {
 					gene.remove(j);
 					gene.add(j, aux);
@@ -135,50 +85,141 @@ public class GeraGeracoes {
 		List imprimir = new ArrayList<ArrayList>();
 		imprimir = imprime;
 	
-		System.out.println("GERACOES SEM ORDENAR:");
+		
+		System.out.println("-----------------------------------------------------------");
+		System.out.println("GERACÃO:");
 		ListIterator<ArrayList> litr = null;
 		
+		int i = 0; 
 		litr = imprimir.listIterator();
 		
 		while(litr.hasNext()) {
-			System.out.println(litr.next());
+			System.out.println(i+" "+litr.next());
+			i++;
 		}
 		
 	}
 	
-	public List<ArrayList> crossover(List genesFilhos){
+	public List<ArrayList> crossover(List genesFilhos, int geracoes){
+		List genesFilho = new ArrayList(genesFilhos);
+	    
+		int var1 = 0;
+		int var2 = 0;
 		
-		
-		for(int i = 0;i< genesFilhos.size();i++) {
-			ArrayList aux = new ArrayList((ArrayList) genesFilhos.get(i));
-			//aux = (ArrayList) genesFilhos.get(i);// Passa o i List para o Arraylist aux
-			int custo = 0;	
+		for(int h = 0; h <= geracoes; h++) {
 			
-			//FOR que passa em todas as posicoes
-			for(int j = 1;j < aux.size()-1 ; j++) {
+			while((var1 == 0 && var2 == 0) || (var1 == this.getArray().size() && var2 == this.getArray().size())){ 
 				
-					ArrayList aux2 = new ArrayList((ArrayList) genesFilhos.get(j));
-					
-					ArrayList pai = new ArrayList(this.getArray()); // Copia vetor 1
-					ArrayList mae = new ArrayList(this.getArray()); // Copia vetor 2
-						
-					mae.add(5, aux.get(5));
-					pai.add(5, aux2.get(5));
-					
-					mae.add(7, aux.get(7));
-					pai.add(7, aux2.get(7));
-					
-					mae = this.verificaPosicoes(mae);
-					System.out.println(mae);
-				}
-			
+				Random random = new Random();
+				var1 = random.nextInt(this.getArray().size()); // Variavel que irá definir o corte
+				var2 = random.nextInt(this.getArray().size()); // Variavel que irá definir o corte
 			}
+			genesFilho = this.retiraCusto(genesFilho); // Retira custo dos Arrays
+			
 		
+			for(int i = 0;i < genesFilho.size();i++) {
+				int tam = filhos.size();
+				ArrayList aux = new ArrayList((ArrayList) genesFilho.get(i));
+				
+				//FOR que passa em todas as posicoes
+				for(int j = 1;j <genesFilho.size()-1 ; j++) {
+					int tam1=aux.size();
+					
+						ArrayList aux2 = new ArrayList((ArrayList) genesFilho.get(j));
+						
+						ArrayList pai = new ArrayList(aux); // Copia aux 1
+						ArrayList mae = new ArrayList(aux2); // Copia aux 2
+						
+						mae.remove(var1);	
+						mae.add(var1, aux.get(var1));
+						
+						pai.remove(var1);
+						pai.add(var1, aux2.get(var1));
+						
+						mae.remove(var2);
+						mae.add(var2, aux.get(var2));
+						
+						pai.remove(var2);
+						pai.add(var2, aux2.get(var2));
+						
+						//mae = this.verificaRepeticao(mae);
+						pai = this.verificaRepeticao(pai);
+						
+						filhos.add(pai);
+						//gravarArq.print(pai);
+						
+					}
+				
+				}
+			filhos = matriz.calcularDistancia(filhos); // Calcula distancia entre cidades			
+			matriz.OrdenaVetor(filhos);  // Ordena a lista de filhos
+			//System.out.println(filhos);
+			//this.imprimirGeracoes(filhos);
+			filhos = this.qtdPosicoes(filhos); //Pega apenas os 100 primeiros
+			
+			
+			this.imprimirGeracoes(filhos);
+			
+			
+			genesFilho = new ArrayList(filhos);
+			filhos.clear();
+		 
+		}
+		list.clear();
+		return list;
+		
+	}
+
+	public List retiraCusto(List params) {
+		ListIterator<ArrayList> litr = null;
+		litr = params.listIterator();
+		
+		while(litr.hasNext()) {
+			ArrayList teste = litr.next();
+			
+			teste.remove((teste.size()-1));
+			
+		}
+		
+		return params;
+	}
+	public ArrayList verificaRepeticao(ArrayList genes) {
+		
+		int j = 1;
+		Random gerador = new Random();
+		ArrayList gene = new ArrayList();//copia o array sem a referencia de memoria
+		
+		ListIterator<ArrayList> litr = null;
+		litr = genes.listIterator();
+	
+		while(litr.hasNext()) {
+			Object gene1 = litr.next();
+			if(!gene.contains(gene1) && genes.size() != gene.size()) {
+				gene.add(gene1);
+			}else if(gene.contains(gene1) && genes.size() == (gene.size()+1)) {
+				gene.add(gene1);
+			} else {
+				gene.add("A");
+			}
+		}
+		if(gene.contains("A")) {
+			gene = this.verificaPosicoes(gene);
+		}
+		return gene;
+	}
+	
+	public List qtdPosicoes(List genes) {
+		List list = new ArrayList<ArrayList>();
+		
+		for(int i = 0;i< 200 ;i++) {
+			//ArrayList aux = new ArrayList((ArrayList) genes.get(i));
+			list.add(genes.get(i));
+				
+		}
 		return list;
 	}
 	
 	
->>>>>>> 451565914baad5c44e57016532cfbcf598a4c2d6
 }
 	
 
