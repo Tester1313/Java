@@ -17,23 +17,25 @@ public class main {
 		String nome;
 		List list = new ArrayList<ArrayList>();
 		// Classe que le e inicializa matriz
-		LeArquivo le = new LeArquivo(new int [48][48]);
+		LeArquivo le = new LeArquivo(new int [10][10]);
 		
-		nome ="c:\\teste\\b.txt";
+		nome ="c:\\teste\\c.txt";
 		scan.close();
 		le.leituraDeArquivo(nome); // le  arquivo e inicializa matriz
 		
 		//Passo a matriz do txt para a classe matriz
 		matriz.setMatriz(le.getMatriz());
 		
-		GeraGeracoes geracoes = new GeraGeracoes(49,matriz);
+		GeraGeracoes geracoes = new GeraGeracoes(10,matriz);
 		list = geracoes.gerarGeracoes();
 		
 		list = matriz.calcularDistancia(list);
 		matriz.OrdenaVetor(list);
 		geracoes.imprimirGeracoes(list);
 		
-		list = geracoes.crossover(list,2);
+		list = geracoes.crossover(list,5);
+		
+		System.out.println("Melhor caminho: "+ geracoes.getBestway());
 	
 	}
 

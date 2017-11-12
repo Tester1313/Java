@@ -12,27 +12,47 @@ public class GeraGeracoes {
 
 	ArrayList array;
 	ArrayList genes;
-	
+	ArrayList bestway = new ArrayList();
 	Matriz matriz = new Matriz();
+	int numCidades;  // 
 	
+	public int getnumCidades() {
+		return numCidades;
+	}
+
+	public void setnumCidades(int numCidades) {
+		this.numCidades = numCidades;
+	}
+
+	public ArrayList getBestway() {
+		return bestway;
+	}
+
+	public void setBestway(ArrayList bestway) {
+		this.bestway = bestway;
+	}
+
 	//Lista de ArrayList com as Geracoes gerada
 	List list = new ArrayList<ArrayList>();
 	List filhos = new ArrayList<ArrayList>();
 	
 	public GeraGeracoes(int numCidades,Matriz matriz) {
 		this.matriz = matriz;
+		this.setnumCidades(numCidades);
 		array = new ArrayList(numCidades);
 		
 		Random random = new Random();
 		int aux = random.nextInt(numCidades); // Gera primeira e ultima cidade Aleatoria
 		
-		for(int i = 0; i < (numCidades); i++) {
-			if(i == 0 || i == (numCidades-1)) {
-				array.add(i,aux);
+		for(int i = 0; i < (this.getnumCidades()); i++) {
+			if(i == 0 || i == (numCidades -1)) {
+				array.add(i,0);
 			}else {
 				array.add("A");
 			}
 		}
+		bestway = new ArrayList(array);
+		bestway.add(1000000000);
 	}
 	
 	public ArrayList getArray() {
@@ -68,7 +88,7 @@ public class GeraGeracoes {
 			if( genes.get(j).toString().equals("A")) {
 				//Verifica se o valor ja esta no array, caso não, remove o valor atual e insere o novo valor na posicao j
 				int a = this.getArray().size();
-				int aux = gerador.nextInt(48);
+				int aux = gerador.nextInt(this.getnumCidades());
 				if(!gene.contains(aux)) {
 					gene.remove(j);
 					gene.add(j, aux);
@@ -78,6 +98,7 @@ public class GeraGeracoes {
 				j++;
 			}
 		}
+		
 		return gene;
 	}
 	
@@ -107,12 +128,15 @@ public class GeraGeracoes {
 		int var2 = 0;
 		
 		for(int h = 0; h <= geracoes; h++) {
+			var1 = 0;
+			var2 = 0;
 			
 			while((var1 == 0 && var2 == 0) || (var1 == this.getArray().size() && var2 == this.getArray().size())){ 
 				
 				Random random = new Random();
-				var1 = random.nextInt(this.getArray().size()); // Variavel que irá definir o corte
-				var2 = random.nextInt(this.getArray().size()); // Variavel que irá definir o corte
+				int aux = getArray().size();
+				var1 = random.nextInt((this.getArray().size()-1)); // Variavel que irá definir o corte
+				var2 = random.nextInt((this.getArray().size()-1)); // Variavel que irá definir o corte
 			}
 			genesFilho = this.retiraCusto(genesFilho); // Retira custo dos Arrays
 			
@@ -142,19 +166,17 @@ public class GeraGeracoes {
 						pai.remove(var2);
 						pai.add(var2, aux2.get(var2));
 						
-						//mae = this.verificaRepeticao(mae);
+						mae = this.verificaRepeticao(mae);
 						pai = this.verificaRepeticao(pai);
 						
 						filhos.add(pai);
-						//gravarArq.print(pai);
+						filhos.add(mae);
 						
 					}
 				
 				}
 			filhos = matriz.calcularDistancia(filhos); // Calcula distancia entre cidades			
 			matriz.OrdenaVetor(filhos);  // Ordena a lista de filhos
-			//System.out.println(filhos);
-			//this.imprimirGeracoes(filhos);
 			filhos = this.qtdPosicoes(filhos); //Pega apenas os 100 primeiros
 			
 			
@@ -210,10 +232,20 @@ public class GeraGeracoes {
 	
 	public List qtdPosicoes(List genes) {
 		List list = new ArrayList<ArrayList>();
+		ArrayList aux = new ArrayList();
 		
-		for(int i = 0;i< 200 ;i++) {
+		int qtd = (int) (genes.size() * 0.1);
+		
+		
+		for(int i = 0;i< 99 ;i++) {
 			//ArrayList aux = new ArrayList((ArrayList) genes.get(i));
 			list.add(genes.get(i));
+			aux =(ArrayList) genes.get(i);
+			
+			int aux1=aux.size();
+			if((int)aux.get((int)(aux.size()-1)) < ((int) bestway.get((int)(aux.size()-1)))) {
+				bestway = new ArrayList(aux);
+			}
 				
 		}
 		return list;
