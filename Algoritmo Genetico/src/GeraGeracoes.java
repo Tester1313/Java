@@ -103,11 +103,9 @@ public class GeraGeracoes {
 	public List<ArrayList> crossover(List genesFilhos, int geracoes){
 		List genesFilho = new ArrayList(genesFilhos);
 	    
-		int var1 = 0;
-		int var2 = 0;
-		
 		for(int h = 0; h <= geracoes; h++) {
-			
+			int var1 = 0;
+			int var2 = 0;	
 			while((var1 == 0 && var2 == 0) || (var1 == this.getArray().size() && var2 == this.getArray().size())){ 
 				
 				Random random = new Random();
